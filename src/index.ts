@@ -12,6 +12,7 @@ const { Guilds, MessageContent, GuildMessages, GuildMembers } = GatewayIntentBit
 
 terminal.underline.colorRgbHex("#00ffff", "REBORN DISCORD BOT\n")
 
+//it's hard to asynchronously import a global module. left require
 const config: { [key: string]: string } = require("../config.json");
 
 const client: Client = new Client({ intents: [MessageContent, GuildMembers, GuildMessages, "Guilds"] })

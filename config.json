@@ -10,5 +10,9 @@
     "irc_nick": "nitka-reborn-bot",
 
     "game_broadcast_channel": "cncnet-rb-games",
-    "chat_channel": "cncnet-rb"
+    "chat_channel": "cncnet-rb",
+
+    "allowedModuleTypes": [
+        "js", "ts"
+    ]
 }

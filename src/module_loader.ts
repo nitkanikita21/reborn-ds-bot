@@ -5,12 +5,17 @@ import * as fs from "fs";
 import { terminal } from "terminal-kit";
 import path from "path";
 
+const {allowedModuleTypes} = require("../config.json");
+
 export function loadModules(pathToModules: string): Module[] {
     let modules: Module[] = [];
 
     terminal.green("[📦] ").white("Started loading bot modules!\n")
     fs.readdirSync(pathToModules).forEach(filename => {
-        if(!filename.endsWith(".js")){
+        let filenameSplit: string[] = filename.split("."); 
+        let extname: string = filenameSplit[filenameSplit.length - 1];
+
+        if (!allowedModuleTypes.includes(extname)) {
             terminal.red("[❌] ").white("file ").red.bold(filename).white(" is not module!\n")
             return;
         }

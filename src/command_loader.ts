@@ -4,13 +4,18 @@ import * as path from 'path';
 import { terminal } from "terminal-kit";
 import { Command } from "./types";
 
+const {allowedModuleTypes} = require("../config.json");
+
 export function loadCommands(pathCommandDir: string, token: string, clientId: string, guildId: string): Collection<string, Command> {
     let commands: Collection<string, Command> = new Collection();
     let commandArray: RESTPostAPIChatInputApplicationCommandsJSONBody[] = []
 
     terminal.green("[/] ").white("Started loading application (/) commands.\n")
-    fs.readdirSync(pathCommandDir).forEach(filename => {
-        if (!filename.endsWith(".js")) {
+    fs.readdirSync(pathCommandDir).forEach((filename: string) => {
+        let filenameSplit: string[] = filename.split("."); 
+        let extname: string = filenameSplit[filenameSplit.length - 1];
+
+        if (!allowedModuleTypes.includes(extname)) {
             terminal.red("[❌] ").white("file ").red.bold(filename).white(" is not command!\n")
             return;
         }
